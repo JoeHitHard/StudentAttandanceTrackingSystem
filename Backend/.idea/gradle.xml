@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/AttendanceTrackingSystem" />
+        <option name="gradleJvm" value="openjdk-21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/AttendanceTrackingSystem" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/AttendanceTrackingSystem" name="AttendanceTrackingSystem">
+                <projects>
+                  <project path="$PROJECT_DIR$/AttendanceTrackingSystem" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/AttendanceTrackingSystemAttendanceService" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/AttendanceTrackingSystem" />
+            <option value="$PROJECT_DIR$/AttendanceTrackingSystemAttendanceService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/AttendanceTrackingSystem" name="AttendanceTrackingSystem">
+                <projects>
+                  <project path="$PROJECT_DIR$/AttendanceTrackingSystem" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/AttendanceTrackingSystemAuthService" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/AttendanceTrackingSystem" />
+            <option value="$PROJECT_DIR$/AttendanceTrackingSystemAuthService" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

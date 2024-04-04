@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build:
+      context: ./RideShareAppAuthService
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - ride-share-network
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8080/api/rs/health" ]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 20s
+
+  ride-service:
+    build:
+      context: ./RideShareAppRideService
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - ride-share-network
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8081/api/rs/health" ]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 20s
+
+  chat-service:
+    build:
+      context: ./RideShareAppChatService
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - ride-share-network
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://localhost:8082/api/rs/health" ]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+      start_period: 20s
+
+#  cassandra:
+#    build: .
+#    image: cassandra
+#    container_name: cassandradb
+#    volumes:
+#      - ./cassandra.yaml:/etc/cassandra/cassandra.yaml
+#    ports:
+#      - "9042:9042"
+#    networks:
+#      - ride-share-network
+
+networks:
+  ride-share-network:
+    driver: bridge
