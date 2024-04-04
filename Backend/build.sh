@@ -1,19 +1,15 @@
 #!/bin/sh
 
-cd ./RideShareApp || exit
+cd ./AttendanceTrackingSystem || exit
 ./gradlew clean build publishToMavenLocal
 cd ..
 
 
-cd ./RideShareAppAuthService || exit
+cd ./AttendanceTrackingSystemAttendanceService || exit
 ./gradlew clean build
 cd ..
 
-cd ./RideShareAppChatService || exit
-./gradlew clean build
-cd ..
-
-cd ./RideShareAppRideService || exit
+cd ./AttendanceTrackingSystemAuthService || exit
 ./gradlew clean build
 cd ..
 
