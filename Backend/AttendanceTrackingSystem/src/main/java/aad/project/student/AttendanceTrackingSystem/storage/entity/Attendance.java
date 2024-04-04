@@ -41,7 +41,7 @@ public class Attendance {
     }
 
     public Attendance save() {
-        attendanceDAO.insert(attendanceId, date, studentsPresent, teacherId);
+        attendanceDAO.insert(attendanceId, attendanceId, date, studentsPresent, teacherId);
         return this;
     }
 
@@ -149,16 +149,20 @@ public class Attendance {
         public Attendance mapToEntity(String key, Attendance attendance) {
             Row row = get(key).one();
             if (row != null) {
-                if (attendance == null) {
-                    attendance = new Attendance();
-                }
-                attendance.attendanceId = row.getString("attendanceId");
-                attendance.date = row.getString("date");
-                attendance.studentsPresent = row.getList("studentsPresent", String.class);
-                attendance.teacherId = row.getString("teacherId");
-                return attendance;
+                return getAttendance(attendance, row);
             }
             return null;
         }
+    }
+
+    public static Attendance getAttendance(Attendance attendance, Row row) {
+        if (attendance == null) {
+            attendance = new Attendance();
+        }
+        attendance.attendanceId = row.getString("attendanceId");
+        attendance.date = row.getString("date");
+        attendance.studentsPresent = row.getList("studentsPresent", String.class);
+        attendance.teacherId = row.getString("teacherId");
+        return attendance;
     }
 }

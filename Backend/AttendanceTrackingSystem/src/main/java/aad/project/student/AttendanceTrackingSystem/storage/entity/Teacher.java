@@ -40,7 +40,7 @@ public class Teacher {
     }
 
     public Teacher save() {
-        teacherDAO.insert(id, name, email, password);
+        teacherDAO.insert(id, id, name, email, password);
         return this;
     }
 

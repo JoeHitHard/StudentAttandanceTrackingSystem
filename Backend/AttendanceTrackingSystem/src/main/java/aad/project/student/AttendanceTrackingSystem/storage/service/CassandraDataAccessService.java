@@ -18,7 +18,7 @@ public class CassandraDataAccessService {
         if (cqlSession == null) {
             cqlSession = CqlSession.builder().withKeyspace(getKeyspace())
                     .withLocalDatacenter("datacenter1")
-                    .addContactPoint(new InetSocketAddress("172.20.0.3", 9042)).build(); // Change this based on Cassandra port ID from Docker
+                    .addContactPoint(new InetSocketAddress("localhost", 9042)).build(); // Change this based on Cassandra port ID from Docker
         }
     }
 

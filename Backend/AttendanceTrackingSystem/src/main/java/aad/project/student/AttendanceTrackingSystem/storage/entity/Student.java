@@ -18,7 +18,6 @@ public class Student {
     private final transient StudentDAO studentDAO;
     private String id;
     private String name;
-    private String rollNumber;
     private String email;
 
     public Student() {
@@ -31,16 +30,15 @@ public class Student {
         studentDAO.mapToEntity(id, this);
     }
 
-    public Student(String id, String name, String rollNumber, String email) {
+    public Student(String id, String name, String email) {
         this();
         this.id = id;
         this.name = name;
-        this.rollNumber = rollNumber;
         this.email = email;
     }
 
     public Student save() {
-        studentDAO.insert(id, name, rollNumber, email);
+        studentDAO.insert(id, id, name, email);
         return this;
     }
 
@@ -50,7 +48,7 @@ public class Student {
     }
 
     public Student update() {
-        studentDAO.update(id, name, rollNumber, email);
+        studentDAO.update(id, id, name, email);
         return this;
     }
 
@@ -70,14 +68,6 @@ public class Student {
         this.name = name;
     }
 
-    public String getRollNumber() {
-        return rollNumber;
-    }
-
-    public void setRollNumber(String rollNumber) {
-        this.rollNumber = rollNumber;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -91,7 +81,6 @@ public class Student {
         return new StringJoiner(", ", Student.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
                 .add("name='" + name + "'")
-                .add("rollNumber='" + rollNumber + "'")
                 .add("email='" + email + "'")
                 .toString();
     }
@@ -99,7 +88,7 @@ public class Student {
     public static class StudentDAO extends AbstractCassandraDataAccessor<Student> {
 
         public static final PreparedStatement CREATE_STMT = getCqlSession().prepare("CREATE TABLE IF NOT EXISTS " +
-                STUDENTS_TABLE + " (id TEXT PRIMARY KEY, name TEXT, rollNumber TEXT, email TEXT)");
+                STUDENTS_TABLE + " (id TEXT PRIMARY KEY, name TEXT, email TEXT)");
         public static PreparedStatement INSERT_STMT;
         public static PreparedStatement UPDATE_STMT;
         public static PreparedStatement DELETE_STMT;
@@ -114,7 +103,7 @@ public class Student {
         public PreparedStatement getInsertStatement() {
             if (INSERT_STMT == null) {
                 INSERT_STMT = getCqlSession().prepare("INSERT INTO " + STUDENTS_TABLE
-                        + " (id, name, rollNumber, email) VALUES (?, ?, ?, ?)");
+                        + " (id, name, email) VALUES (?, ?, ?)");
             }
             return INSERT_STMT;
         }
@@ -123,7 +112,7 @@ public class Student {
         public PreparedStatement getUpdateStatement() {
             if (UPDATE_STMT == null) {
                 UPDATE_STMT = getCqlSession().prepare("UPDATE " + STUDENTS_TABLE
-                        + " SET name = ?, rollNumber = ?, email = ? WHERE id = ?");
+                        + " SET name = ?, email = ? WHERE id = ?");
             }
             return UPDATE_STMT;
         }
@@ -153,7 +142,6 @@ public class Student {
                 }
                 student.id = row.getString("id");
                 student.name = row.getString("name");
-                student.rollNumber = row.getString("rollNumber");
                 student.email = row.getString("email");
                 return student;
             }
